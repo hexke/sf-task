@@ -1,0 +1,20 @@
+.sectionTag {
+  font-weight: 300;
+  font-size: 1.5em;
+  display: inline-block;
+  position: relative;
+  text-transform: none;
+  width: max-content;
+}
+
+.sectionTag::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 115%;
+  height: 1px;
+  background-color: currentColor;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -50%) rotate(-40deg);
+}
