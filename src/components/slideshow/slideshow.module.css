@@ -78,3 +78,25 @@
 .slideNav span:hover {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 900px) {
+  .slide div {
+    padding-left: 50px;
+    align-self: end;
+    margin-bottom: 130px;
+  }
+
+  .slideNav {
+    bottom: 50px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .slide div {
+    padding-left: 15px;
+  }
+
+  .slideNav {
+    bottom: 30px;
+  }
+}

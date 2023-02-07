@@ -1,7 +1,30 @@
+import { useEffect } from 'react';
 import Dropdown from './dropdown';
 import classes from './navigation.module.css';
 
 const Navigation = () => {
+
+    useEffect(() => {
+        let navigationToggle = document.querySelector("#navigation-toggle");
+
+        const navigationToggleHandler = () => {
+            if (document.querySelector("#navigation-toggle").checked) {
+                document.body.style.overflowY = "hidden";
+            } else {
+                document.body.style.overflowY = "scroll";
+            }
+        }
+
+        if (window.matchMedia("(max-width:900px)").matches) {
+            navigationToggle.addEventListener("change", navigationToggleHandler);
+        }
+
+        return () => {
+            navigationToggle.removeEventListener("change", navigationToggleHandler);
+        };
+
+    }, []);
+
     return (
         <>
             <input className={classes.navigationToggle} type="checkbox" id="navigation-toggle" hidden />
