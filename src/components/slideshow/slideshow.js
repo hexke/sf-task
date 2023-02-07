@@ -9,36 +9,58 @@ const Slideshow = () => {
     useEffect(() => {
         let nav;
         let slides;
+        let currentSlide = 0;
+
+        const changeSlide = (index) => {
+            if (currentSlide === index) return;
+            slides[currentSlide].classList.remove(`${classes.active}`);
+            setTimeout(() => {
+                slides[currentSlide].style.zIndex = -1;
+                slides[index].style.zIndex = 1;
+                setTimeout(() => {
+                    slides[index].classList.add(`${classes.active}`);
+                }, 0);
+            }, 100);
+            currentSlide = index;
+        }
 
         const initNav = () => {
             nav = document.querySelector('.slideNav');
             slides = [...document.querySelectorAll('.slide')];
-            let prevSlide = 0;
 
             [...document.querySelectorAll('.slide')].forEach((slide, index) => {
                 let span = document.createElement('span');
                 span.id = `slide-${index}`;
                 nav.appendChild(span);
-
-                span.addEventListener("click", function () {
-                    if (prevSlide === index) return;
-                    slides[prevSlide].classList.remove(`${classes.active}`);
-                    setTimeout(() => {
-                        slides[prevSlide].style.zIndex = -1;
-                        slides[index].style.zIndex = 1;
-                        setTimeout(() => {
-                            slides[index].classList.add(`${classes.active}`);
-                        }, 0);
-                    }, 100);
-                    prevSlide = index;
-                });
+                span.addEventListener("click", () => { changeSlide(index) });
             });
         };
 
+        const keydownHandler = (e) => {
+            console.log(currentSlide === slides.length - 1, e.key === "ArrowRight");
+            if (e.key === "ArrowRight") {
+                if (currentSlide === slides.length - 1) {
+                    changeSlide(0);
+                } else {
+                    changeSlide(currentSlide + 1);
+                }
+            }
+
+            if (e.key === "ArrowLeft") {
+                if (currentSlide === 0) {
+                    changeSlide(slides.length - 1);
+                } else {
+                    changeSlide(currentSlide - 1);
+                }
+            }
+        }
+
         initNav();
+        document.addEventListener("keydown", keydownHandler);
 
         return () => {
             nav.innerHTML = '';
+            document.removeEventListener("keydown", keydownHandler);
         }
     }, []);
 
