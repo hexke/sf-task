@@ -1,10 +1,12 @@
 import classes from './slideshow.module.css';
 import slideOne from '../../img/slide1-big.jpg';
 import slideTwo from '../../img/slide2-big.jpg';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Slide from './slide';
+import { themeContext } from '../store/theme-store';
 
 const Slideshow = () => {
+    const { darkTheme, toggleDarkTheme } = useContext(themeContext);
 
     useEffect(() => {
         let nav;
@@ -19,6 +21,7 @@ const Slideshow = () => {
                 slides[index].style.zIndex = 1;
                 setTimeout(() => {
                     slides[index].classList.add(`${classes.active}`);
+                    toggleDarkTheme(currentSlide % 2 !== 0);
                 }, 0);
             }, 100);
             currentSlide = index;
@@ -64,9 +67,8 @@ const Slideshow = () => {
         }
     }, []);
 
-
     return (
-        <div className={classes.slideshow}>
+        <div className={`${classes.slideshow} ${darkTheme ? classes["dark-theme"] : ""}`}>
             <Slide className={`slide ${classes.slide} ${classes.active}`} imageSrc={slideOne} imageAlt="">
                 <p className={classes.text}>Bez kompromisu<br />Idealnie takie jak lubisz.
                 </p>

@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.dark-theme {
+  color: black;
+}
+
 .slide {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
@@ -31,7 +35,6 @@
 }
 
 .slide div {
-  color: white;
   font-size: clamp(28px, 4vw, 56px);
   font-weight: 100;
   align-self: center;
@@ -61,18 +64,18 @@
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid currentColor;
   display: flex;
   padding-bottom: 10px;
 }
 
 .slideNav span {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   display: block;
-  margin: 0 30px;
-  border: 1px solid white;
+  margin: 0 35px;
+  border: 1px solid currentColor;
 }
 
 .slideNav span:hover {
