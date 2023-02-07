@@ -12,6 +12,15 @@
   background-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0) 95%);
 }
 
+.dark-theme {
+    color: black;
+    background-image: linear-gradient(to bottom, white 0%, rgba(0, 0, 0, 0) 95%);
+}
+
+.dark-theme svg {
+  fill: black;
+}
+
 .logo {
   z-index: 1000;
 }
