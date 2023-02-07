@@ -1,6 +1,5 @@
 import SectionTag from "../sectionTag/sectionTag";
 
-
 const Slide = ({ children, imageSrc, imageAlt, ...rest }) => {
     const alt = imageAlt ? imageAlt : "";
 
@@ -13,7 +12,6 @@ const Slide = ({ children, imageSrc, imageAlt, ...rest }) => {
             </div>
         </div>
     );
-
 }
 
 export default Slide;
