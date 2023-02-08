@@ -18,11 +18,13 @@ const Slideshow = () => {
         const changeSlide = (index) => {
             if (currentSlide === index) return;
             slides[currentSlide].classList.remove(`${classes.active}`);
+            nav.children[currentSlide].classList.remove(`${classes.active}`);
             setTimeout(() => {
                 slides[currentSlide].style.zIndex = -1;
                 slides[index].style.zIndex = 1;
                 setTimeout(() => {
                     slides[index].classList.add(`${classes.active}`);
+                    nav.children[index].classList.add(`${classes.active}`);
                     toggleDarkTheme(currentSlide % 2 !== 0);
                 }, 0);
             }, 100);
@@ -49,7 +51,7 @@ const Slideshow = () => {
             nav = document.querySelector('.slideNav div:last-child');
             slides = [...document.querySelectorAll('.slide')];
 
-            [...document.querySelectorAll('.slide')].forEach((slide, index) => {
+            [...document.querySelectorAll('.slide')].forEach((_, index) => {
                 let span = document.createElement('span');
                 span.id = `slide-${index}`;
                 nav.appendChild(span);
