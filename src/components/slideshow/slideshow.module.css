@@ -19,8 +19,12 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.active {
+.slide.active {
   opacity: 1;
+}
+
+span.active {
+    background-color: currentColor;
 }
 
 .slide > * {
