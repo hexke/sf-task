@@ -39,23 +39,47 @@
   font-weight: 100;
   align-self: center;
   padding-left: 100px;
+  padding-top: 105px;
 }
 
 .slide .text {
-  margin: 30px 0 15px 0;
+  margin: 30px 0 10px 0;
 }
 
-.slide p:last-child {
+.slide p:last-of-type {
   font-size: 0.5em;
   text-transform: uppercase;
 }
 
-.slide p:last-child span {
+.slide p:last-of-type span {
   font-weight: 400;
 }
 
 .slide:first-child {
   z-index: 1;
+}
+
+.slide a {
+  display: flex;
+  margin-top: 35px;
+  align-items: center;
+}
+
+.slide a span {
+  font-weight: 100;
+  font-size: 15px;
+  border: 1px solid currentColor;
+  padding: 14px 20px;
+  border-radius: 50%;
+  line-height: 1em;
+}
+
+.slide a::before {
+  content: "";
+  width: 10vw;
+  margin-right: 30px;
+  display: inline-block;
+  border-bottom: 1px solid currentColor;
 }
 
 .slideNav {
@@ -64,12 +88,18 @@
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideNav div:last-child {
   border-bottom: 1px solid currentColor;
   display: flex;
   padding-bottom: 10px;
 }
 
-.slideNav span {
+.slideNav div:last-child span {
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -80,6 +110,13 @@
 
 .slideNav span:hover {
   cursor: pointer;
+}
+
+.arrows  {
+    gap: 20px;
+    display: flex;
+    margin-bottom: 35px;
+    flex-direction: column;
 }
 
 @media only screen and (max-width: 900px) {
@@ -101,5 +138,22 @@
 
   .slideNav {
     bottom: 30px;
+    gap: 15px;
+    flex-direction: column-reverse;
+  }
+
+  .arrows {
+    flex-direction: row;
+    gap: 50px;
+    margin-bottom: 0px;
+  }
+
+  .slide a{
+    margin-top: 15px;
+  }
+
+  .slide a::before {
+    width: 100px;
+    margin-right: 15px;
   }
 }

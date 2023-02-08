@@ -12,6 +12,8 @@ const Slideshow = () => {
         let nav;
         let slides;
         let currentSlide = 0;
+        const arrowPrevSlide = document.getElementById("prevSlide");
+        const arrowNextSlide = document.getElementById("nextSlide");
 
         const changeSlide = (index) => {
             if (currentSlide === index) return;
@@ -27,8 +29,24 @@ const Slideshow = () => {
             currentSlide = index;
         }
 
+        const NextSlide = () => {
+            if (currentSlide === slides.length - 1) {
+                changeSlide(0);
+            } else {
+                changeSlide(currentSlide + 1);
+            }
+        }
+
+        const PrevSlide = () => {
+            if (currentSlide === 0) {
+                changeSlide(slides.length - 1);
+            } else {
+                changeSlide(currentSlide - 1);
+            }
+        }
+
         const initNav = () => {
-            nav = document.querySelector('.slideNav');
+            nav = document.querySelector('.slideNav div:last-child');
             slides = [...document.querySelectorAll('.slide')];
 
             [...document.querySelectorAll('.slide')].forEach((slide, index) => {
@@ -40,30 +58,25 @@ const Slideshow = () => {
         };
 
         const keydownHandler = (e) => {
-            console.log(currentSlide === slides.length - 1, e.key === "ArrowRight");
             if (e.key === "ArrowRight") {
-                if (currentSlide === slides.length - 1) {
-                    changeSlide(0);
-                } else {
-                    changeSlide(currentSlide + 1);
-                }
+                NextSlide();
             }
 
             if (e.key === "ArrowLeft") {
-                if (currentSlide === 0) {
-                    changeSlide(slides.length - 1);
-                } else {
-                    changeSlide(currentSlide - 1);
-                }
+                PrevSlide();
             }
         }
 
         initNav();
         document.addEventListener("keydown", keydownHandler);
-
+        arrowPrevSlide.addEventListener("click", PrevSlide);
+        arrowNextSlide.addEventListener("click", NextSlide);
+        
         return () => {
             nav.innerHTML = '';
             document.removeEventListener("keydown", keydownHandler);
+            arrowPrevSlide.removeEventListener("click", PrevSlide);
+            arrowNextSlide.removeEventListener("click", NextSlide);
         }
     }, []);
 
@@ -73,13 +86,20 @@ const Slideshow = () => {
                 <p className={classes.text}>Bez kompromisu<br />Idealnie takie jak lubisz.
                 </p>
                 <p>Keune <span>design</span></p>
+                <a href="#"><span>&#10095;</span></a>
             </Slide>
             <Slide className={`slide ${classes.slide}`} imageSrc={slideTwo} imageAlt="">
                 <p className={classes.text}>Bez kompromisu<br />Idealnie takie jak lubisz.
                 </p>
-                <p>Keune <span>design</span></p>
+                <p>Keune <span>care</span></p>
+                <a href="#"><span>&#10095;</span></a>
             </Slide>
             <div className={`slideNav ${classes.slideNav}`}>
+                <div className={classes.arrows}>
+                    <span id="prevSlide">&#10094;</span>
+                    <span id="nextSlide">&#10095;</span>
+                </div>
+                <div></div>
             </div>
         </div>
     );
